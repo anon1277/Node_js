@@ -1,0 +1,1 @@
+console.log("accesing static files");
