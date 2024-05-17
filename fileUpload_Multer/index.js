@@ -10,7 +10,7 @@ const upload = multer({
     storage: multer.diskStorage({
         // Set the destination folder for uploaded files
         destination: function (req, file, cb) {
-            cb(null, "uploads")
+            cb(null, "uplods")
         },
         // Set the filename for uploaded files
         filename: function (req, file, cb) {
@@ -21,8 +21,8 @@ const upload = multer({
 
 // File upload route 
 app.post('/upload', upload, (req, res) => {
-    res.send("File uploaded successfully");
-});
+    res.send("file uploade Sucess");
+})
 
 // Start the server on port 9090
 app.listen(9090, () => {
