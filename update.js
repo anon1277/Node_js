@@ -13,6 +13,7 @@ const UpdateData = async () => {
 
             }
     });
+    console.log(result);
 }
 
 //call delete data

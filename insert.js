@@ -44,5 +44,4 @@ const insertdata = async () => {
     }
 }
 
-
 insertdata();       

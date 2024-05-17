@@ -43,12 +43,11 @@ app.put('/:name', async (req, res) => {
 
 });
 
-
 // Delete API
 app.delete('/:id', async (req, res) => {
 
     let data = await dbConnect(); // Establish Database Connection
-    let result = data.deleteOne(
+    let result = await data.deleteOne(
         { _id: new mongodb.ObjectId(req.params.id)}
     ); // Extract data from the request and update in the database 
     res.send(result); // Return the result
