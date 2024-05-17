@@ -59,14 +59,31 @@ const updateData = async () => {
     }
 };
 
+
+// Delete data function
+const deleteData = async () => {
+    // Create a Mongoose model based on the schema for collection 'shops1'
+    const ProductModel = mongoose.model("shops1", ProductSchema);
+
+    try {
+        let result = await ProductModel.deleteOne({ name: "Test Item Nz" });
+
+        console.log("Delete data result:", result);
+    } catch (error) {
+        console.error("Error deleting data:", error);
+    }
+};
+
 // Connect to the database and perform operations
 const run = async () => {
     await connectDB();
     // Uncomment to save new data
     // await SaveinDb();
-    await updateData();
+    // await updateData();
 
-    await SaveinDb();
+    // await SaveinDb();
+
+    await deleteData();
 
     // Close the connection to the database
     mongoose.connection.close();
