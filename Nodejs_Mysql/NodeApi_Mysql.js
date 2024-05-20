@@ -1,30 +1,40 @@
-// Require the 'mysql' module
-const mysql = require('mysql');
+const express = require('express');
+const con = require('./config'); // Import the database connection
+const app = express();
 
-// Log the 'mysql' module to the console
-console.log(mysql);
+// Define a GET endpoint '/orders'
 
-// Create a connection to the MySQL database
-const con = mysql.createConnection({
-    host: "localhost",       // Database host
-    user: "root",            // Database user
-    password: "password",    // Database password
-    database: "laravel_e_com_test" // Database name
+app.use(express.json())
+app.get('/orders', (req, res) => {
+    // Execute a query to select all records from the 'orders' table
+    con.query("select * from orders", (err, result) => {
+        if (err) {
+            // Send the error response if the query fails
+            res.send(err);
+        } else {
+            // Send the query result as the response
+            res.send(result);
+        }
+    });
 });
 
-// Connect to the database
-con.connect((err) => {
-    if (err) {
-        // Log the error if the connection fails
-        console.log(err);
-    } else {
-        // Log 'Connected' if the connection is successful
-        console.log("Connected");
-    }
+
+// Define a GET endpoint '/orders'
+app.post('/orders', (req, res) => {
+    let data = req.body;
+    // Execute a query to select all records from the 'orders' table
+    con.query('insert into  orders SET ?',data , (err, result ,fields) => {
+        if (err) {
+            // Send the error response if the query fails
+            res.send(err);
+        } else {
+            // Send the query result as the response
+            res.send(result);
+        }
+    });
 });
 
-// Execute a query to select all records from the 'orders' table
-con.query("select * from orders", (err, result) => {
-    // Log the query result to the console
-    console.log("Result", result);
+// Start the server and listen on port 9090
+app.listen(9090, () => {
+    console.log('Server is running on port 9090');
 });
